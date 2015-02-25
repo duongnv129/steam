@@ -10,12 +10,28 @@ $result["code"] = 0;
 $result["message"] = "Success";
 $result["result"] = "";
 
+$name = "youfel";
+if(isset($_GET["video_name"]))
+    $name = $_GET["video_name"];
+
 if(isset($_GET["video_id"]))
 {
     $youTubeId = $_GET["video_id"];
     $listMedia = getListMedia($youTubeId);
     if(is_array($listMedia) && count($listMedia) > 0)
     {
+        foreach ($listMedia as &$media)
+        {
+            $token = base64_encode($media["url"]);
+            $media["stream"] = "http://" . $_SERVER["HTTP_HOST"] . "/stream.php?mime=" . $media["type"] . "&title=" . $name . "&token=" . $token;
+            $media["download"] = "http://" . $_SERVER["HTTP_HOST"] . "/download.php?mime=" . $media["type"] . "&title=" . $name . "&token=" . $token;
+            unset($media["url"]);
+            unset($media["itag"]);
+            unset($media["expires"]);
+            unset($media["ipbits"]);
+            unset($media["ip"]);
+            unset($media["expire_timestamp"]);
+        }
         $result["result"] = $listMedia;
     }
     else
