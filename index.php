@@ -25,12 +25,12 @@ if(isset($_GET["video_id"]))
             $token = base64_encode($media["url"]);
             $media["stream"] = "http://" . $_SERVER["HTTP_HOST"] . "/stream.php?mime=" . $media["type"] . "&title=" . $name . "&token=" . $token;
             $media["download"] = "http://" . $_SERVER["HTTP_HOST"] . "/download.php?mime=" . $media["type"] . "&title=" . $name . "&token=" . $token;
-            unset($media["url"]);
+            /* unset($media["url"]);
             unset($media["itag"]);
             unset($media["expires"]);
             unset($media["ipbits"]);
             unset($media["ip"]);
-            unset($media["expire_timestamp"]);
+            unset($media["expire_timestamp"]); */
         }
         $result["result"] = $listMedia;
     }
