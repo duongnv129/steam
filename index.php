@@ -51,7 +51,8 @@ echo json_encode($result);
 
 function getListMedia($youTubeId)
 {
-    $videoUrl = 'http://www.youtube.com/get_video_info?&video_id='. $youTubeId . "&el=vevo&el=embedded";
+    $videoUrl = 'http://www.youtube.com/get_video_info?&video_id='. $youTubeId;// . "&el=vevo&el=embedded";
+    $videoUrl = 'http://www.youtube.com/get_video_info?&video_id='. $youTubeId;// . "&el=vevo&el=embedded";
     $videoInfo = getRest($videoUrl);
     parse_str($videoInfo, $data);
     if(isset($data['url_encoded_fmt_stream_map']))
